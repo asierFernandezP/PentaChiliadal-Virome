@@ -7,7 +7,9 @@
 #SBATCH --open-mode=truncate
 #SBATCH --partition=regular
 
+#Load modules
 module load sektq
+
 completed_samples_dir=$1
 MSP_contigs_dir=$2
 
