@@ -1,22 +1,20 @@
 # PentaChiliadal-Virome
-Gut virome analysis from metagenomic data on Lifelines NEXT Cohort
+Gut virome analysis from metagenomic data on Lifelines NEXT Cohort.
+
 
 Introduction
 
-microRNAs (miRNAs) are a class of small non-coding RNAs of between 19-22 nucleotides that act as post-transcriptional regulators of the expression of most proteins, either by repressing translation or by degrading messenger RNAs (mRNAs). The gaining evidence pointing to an essential role of miRNAs in the regulation of numerous biological processes are favoring the development of the miRNA-seq analyses in the last years.
-
-The characterization of the miRNA profiles of SARS-CoV-2 infected patients by massive sequencing constitutes an alternative approach that has been hardly explored, although there is considerable evidence that supports the relevant role of miRNAs in the response to different viral infections. 
+Lifelines NEXT is a birth cohort including 1500 pregnant women, their partners and children living in Northern Netherlands. Extensive biological specimens (including fecal samples) and phenotypyc information (both maternal phenotypes during and after pregnancy, and infant phenotypes during the first year of life). PentaChiliadal-Virome project aims to analyze the gut virome of mothers during and after pregnancy, as well as infant gut virome in early life. For this, longitudinal metagenomic sequencing data from 4,626 samples is used and analyzed trough a custom viral discovery pipeline.
 
 
 Content
 
 We here describe the methods used to:
 
-Perform a descriptive data analysis of clinical variables from COVID-19 patients.
-Identify and quantify all known human miRNAs present in plasma samples.
-Identify and quantify possible new human miRNAs.
-Perform a statistical analysis to determine which miRNAs are associated with a worse prognosis of COVID-19 disease.
-Perform a functional analysis of the deregulated miRNAs between groups, identifying the target genes of these miRNAs and analyzing the metabolic pathways in which the affected genes are involved. 
+Perform the viral detection from assembled metagenomic data (VirSorter2, DeepVirFinder)
+Identify and filter plasmid sequences (geNomad)
+Remove host contamination and filter viral sequences with low completeness (≤50%) (CheckV)
+
 
 The pipelines for each of these analyses are summarized in the next files:
 
@@ -28,7 +26,8 @@ Quantification (2)
 De_novo_miRNA_identification (3)
 Extraction_de_novo_miRNAs (3)
 De_novo_quantification (3)
-b) R scripts:
+
+b) Python scripts:
 
 Descriptive_data_analysis (1)
 Differential_expression_with_DESeq2 (4)
