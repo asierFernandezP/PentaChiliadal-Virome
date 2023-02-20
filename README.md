@@ -11,9 +11,9 @@ Lifelines NEXT is a birth cohort including 1500 pregnant women, their partners a
 
 We here describe the methods used to:
 
-Perform the viral detection from assembled metagenomic data (VirSorter2, DeepVirFinder)
-Identify and filter plasmid sequences (geNomad)
-Remove host contamination and filter viral sequences with low completeness (≤50%) (CheckV)
+- Perform the viral detection from assembled metagenomic data (VirSorter2, DeepVirFinder)
+- Identify and filter plasmid sequences (geNomad)
+- Remove host contamination and filter viral sequences with low completeness (≤50%) (CheckV)
 
 The project workflow is summarized in the next figure:
 
