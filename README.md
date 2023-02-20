@@ -15,24 +15,4 @@ Perform the viral detection from assembled metagenomic data (VirSorter2, DeepVir
 Identify and filter plasmid sequences (geNomad)
 Remove host contamination and filter viral sequences with low completeness (≤50%) (CheckV)
 
-
-The pipelines for each of these analyses are summarized in the next files:
-
-### a) Bash scripts:
-
-Trimming_qualitycontrol
-Mapping
-Quantification (2)
-De_novo_miRNA_identification (3)
-Extraction_de_novo_miRNAs (3)
-De_novo_quantification (3)
-
-### b) Python scripts:
-
-Descriptive_data_analysis (1)
-Differential_expression_with_DESeq2 (4)
-Differential_expression_with_edgeR (4)
-Enrichment_analysis (5) 
-
-
 The project workflow is summarized in the next figure:
