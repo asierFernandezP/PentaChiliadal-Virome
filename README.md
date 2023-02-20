@@ -4,7 +4,7 @@ Gut virome analysis from metagenomic data on Lifelines NEXT Cohort.
 
 ## Introduction
 
-Lifelines NEXT is a birth cohort including 1500 pregnant women, their partners and children living in Northern Netherlands. Extensive biological specimens (including fecal samples) and phenotypyc information (both maternal phenotypes during and after pregnancy, and infant phenotypes during the first year of life). PentaChiliadal-Virome project aims to analyze the gut virome of mothers during and after pregnancy, as well as infant gut virome in early life. For this, longitudinal metagenomic sequencing data from 4,626 samples is used and analyzed through a custom viral discovery pipeline.
+Lifelines NEXT is a birth cohort including 1500 pregnant women, their partners and children living in Northern Netherlands. Extensive biological specimens (including fecal samples) and phenotypyc information (both maternal phenotypes during and after pregnancy, and infant phenotypes during the first year of life) are collected. PentaChiliadal-Virome project aims to analyze the gut virome of mothers during and after pregnancy, as well as infant gut virome in early life. For this, longitudinal metagenomic sequencing data from 4,626 samples is used and analyzed through a custom viral discovery pipeline.
 
 
 ## Content
