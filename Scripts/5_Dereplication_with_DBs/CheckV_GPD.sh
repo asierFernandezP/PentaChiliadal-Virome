@@ -3,7 +3,7 @@
 #SBATCH --output=CheckV_GPD.out
 #SBATCH --mem=32gb
 #SBATCH --time=7-0
-#SBATCH --cpus-per-task=4
+#SBATCH --cpus-per-task=8
 #SBATCH --open-mode=truncate
 #SBATCH --partition=regular
 
