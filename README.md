@@ -16,4 +16,5 @@ Identify and filter plasmid sequences (geNomad)
 Remove host contamination and filter viral sequences with low completeness (≤50%) (CheckV)
 
 The project workflow is summarized in the next figure:
+
 ![alt text](https://github.com/asierFernandezP/PentaChiliadal-Virome/blob/main/Project%20Overview.png)
