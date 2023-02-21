@@ -18,7 +18,7 @@ contig_file_name="${contig_file_name%.*}" #extract filename without the extensio
 #Load Python module
 ml Python/3.9.6-GCCcore-11.2.0 seqtk; ml list
 
-#Process geNomad output file to get a file with the names of idnetified plasmid sequences (1 per row)
+#Process geNomad output file to get a file with the names of identified plasmid sequences (1 per row)
 awk 'NR>1' $plasmids | cut -f1 | sort > Plasmid_sequences.txt
 #Execute the python script that outputs viral_sequences.txt file with only the viral contigs
 python Contig_clustering_processing.py $clusters Plasmid_sequences.txt
