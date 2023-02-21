@@ -14,7 +14,7 @@ output_dir=$2 #path to output directory
 module purge; ml Anaconda3; module list
 source activate /home/umcg-afernandez/.conda/envs/genomad; conda list 
 
-# Run genomAD
+# Run geNomad
 genomad end-to-end \
         --min-score 0.7 \
         --cleanup \
