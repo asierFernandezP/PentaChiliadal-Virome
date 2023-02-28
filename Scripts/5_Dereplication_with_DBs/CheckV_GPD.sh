@@ -4,7 +4,8 @@
 #SBATCH --mem=32gb
 #SBATCH --time=7-0
 #SBATCH --cpus-per-task=8
-#SBATCH --open-mode=truncate
+#SBATCH --export=NONE
+#SBATCH --get-user-env=L
 #SBATCH --partition=regular
 
 database=$1 #path to FASTA file of the database to run through CheckV (e.g. GPD) #/data/umcg-tifn/DATABASES/GPD/GPD_sequences.fa
