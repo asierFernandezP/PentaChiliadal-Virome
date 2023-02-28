@@ -7,8 +7,8 @@
 #SBATCH --open-mode=truncate
 #SBATCH --partition=regular
 
-database=$1 #path to FASTA file of the database to run through CheckV (e.g. GPD)
-output=$2 #path to output directory
+database=$1 #path to FASTA file of the database to run through CheckV (e.g. GPD) #/data/umcg-tifn/DATABASES/GPD/GPD_sequences.fa
+output=$2 #path to output directory (no need to create it in advance)
 
 # Clean environment, load modules and activate conda environment
 module purge; ml Anaconda3; module list
