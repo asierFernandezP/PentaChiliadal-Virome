@@ -4,7 +4,8 @@
 #SBATCH --mem=8gb
 #SBATCH --time=00:19:00
 #SBATCH --cpus-per-task=4
-#SBATCH --open-mode=truncate
+#SBATCH --export=NONE
+#SBATCH --get-user-env=L
 #SBATCH --partition=short
 
 CheckV_dir=$1
