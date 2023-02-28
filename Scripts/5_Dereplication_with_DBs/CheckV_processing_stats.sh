@@ -14,7 +14,7 @@ exec > CheckV_summary_stats_files/CheckV_summary_info.txt
 echo -e "\n" 
 
 echo -e "################################### CHECKV SUMMARY STATS ###################################\n"
-#1. Get files and summary stats of CheckV results
+# 1. Get files and summary stats of CheckV results
 n_provirus=$(cat proviruses.fna | grep ">" | wc -l)
 n_virus=$(cat viruses.fna | grep ">" | wc -l)
 echo "The number of viral sequences detected is: $n_virus (viruses.fna file)"
@@ -30,12 +30,12 @@ n_filtered_contigs=$(cat filtered_CheckV_contigs.txt| wc -l)
 echo "The total number of contigs with completeness >50% is: $n_selected_contigs"
 echo -e "The total number of contigs with completeness =<50% is: $n_filtered_contigs\n"
 
-#2. Get the file and summary stats of viral contigs selected (completeness > 50%) but with 0 viral genes
+# 2. Get the file and summary stats of viral contigs selected (completeness > 50%) but with 0 viral genes
 awk 'NR>1' quality_summary.tsv | grep "no viral genes detected" | grep "Complete\|High-quality\|Medium-quality" | cut -f1 | sort > selected_nonviralgenes_CheckV_contigs.txt
 n_selected_contigs_no_viral_genes=$(cat selected_nonviralgenes_CheckV_contigs.txt| wc -l)
 echo -e "The total number of contigs with completeness >50% but 0 viral genes is: $n_selected_contigs_no_viral_genes\n"
 
-#3. Get files and summary stats of viral contigs with mutiple viral regions
+# 3. Get files and summary stats of viral contigs with mutiple viral regions
 
 # Get a list of contigs with more than 1 viral sequence detected
 # Print the number of contigs
@@ -65,12 +65,15 @@ echo -e "The number of viral sequences from the contigs with more than 1 viral s
 n_multiple_viral_regions_as_viruses=$(grep -wf multiple_viral_region_contigs.txt viruses.fna| wc -l) 
 echo -e "The number of viral sequences from the contigs with more than 1 viral sequence detected and NOT classified as proviruses is: $n_multiple_viral_regions_as_viruses\n"
 
-#4. Merge the selected sequences from the proviruses.fna and viruses.fna files
+# 4. Merge the selected sequences from the proviruses.fna and viruses.fna files
 grep -Fwf selected_CheckV_contigs.txt -A 1 viruses.fna > CheckV_sequences.fna
 sed 's/.*/&_/' selected_CheckV_contigs.txt | grep -A 1 -Ff - proviruses.fna >> CheckV_sequences.fna #adds an underscore at the end of each line #The option - tells grep to read the patterns to search from standard input
 n_final_sequences=$(cat CheckV_sequences.fna| grep ">" | wc -l)
 echo "The final number of viral sequences with completeness >50% is: $n_final_sequences"
 echo -e "The final sequences are available in CheckV_sequences.fna file\n"
+
+# Set permissions
+chmod 440 *_CheckV_contigs.txt CheckV_sequences.fna *multiple_viral_region_contigs.txt
 
 # Move all the generated summary stats files to a folder
 mv *multiple_viral_region_contigs* *CheckV_contigs.txt CheckV_summary_stats_files
