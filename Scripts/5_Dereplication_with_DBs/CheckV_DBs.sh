@@ -1,6 +1,6 @@
 #!/bin/bash
 #SBATCH --job-name=CheckV_DB
-#SBATCH --output=CheckV__%A_%a.out
+#SBATCH --output=CheckV_%j.out
 #SBATCH --mem=32gb
 #SBATCH --time=7-0
 #SBATCH --cpus-per-task=8
