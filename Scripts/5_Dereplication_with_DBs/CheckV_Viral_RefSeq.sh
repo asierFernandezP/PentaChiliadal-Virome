@@ -35,6 +35,11 @@ source activate /data/umcg-llnext/python_venvs/CheckV_conda; conda list
 export PATH="/data/umcg-llnext/python_venvs/CheckV_conda/prodigal-gv:$PATH"
 
 # Run CheckV
-checkv end_to_end non_RNA_viral_refseq.fna $output -t ${SLURM_CPUS_PER_TASK} -d /data/umcg-llnext/python_venvs/CheckV_conda/checkv-db-v1.5
+checkv \
+			 end_to_end \
+    non_RNA_viral_refseq.fna \
+			 $output \
+			 -t ${SLURM_CPUS_PER_TASK} \
+			 -d /data/umcg-llnext/python_venvs/CheckV_conda/checkv-db-v1.5
 
 conda deactivate
