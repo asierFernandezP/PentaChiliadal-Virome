@@ -1,8 +1,8 @@
 #!/bin/bash
 #SBATCH --job-name=CheckV_Viral_RefSeq
 #SBATCH --output=CheckV_Viral_RefSeq.out
-#SBATCH --mem=32gb
-#SBATCH --time=3-0
+#SBATCH --mem=16gb
+#SBATCH --time=11:59:00
 #SBATCH --cpus-per-task=8
 #SBATCH --export=NONE
 #SBATCH --get-user-env=L
