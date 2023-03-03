@@ -21,9 +21,9 @@ awk 'NR>1' $database_tax | grep -v Riboviria | cut -f1,2 | tr "\t" " " | sed 's/
 
 #Extract from the FASTA file of the DB the sequences that are NOT assigned to RNA viruses 
 seqtk subseq \
-    -l 80 \
-    $database \
-    non_RNA_viral_refseq.txt > non_RNA_viral_refseq.fna 
+	-l 80 \
+	$database \
+	non_RNA_viral_refseq.txt > non_RNA_viral_refseq.fna 
 
 # Set permissions
 chmod 440 non_RNA_viral_refseq.fna non_RNA_viral_refseq.txt
@@ -36,10 +36,10 @@ export PATH="/data/umcg-llnext/python_venvs/CheckV_conda/prodigal-gv:$PATH"
 
 # Run CheckV
 checkv \
-			 end_to_end \
-    non_RNA_viral_refseq.fna \
-			 $output \
-			 -t ${SLURM_CPUS_PER_TASK} \
-			 -d /data/umcg-llnext/python_venvs/CheckV_conda/checkv-db-v1.5
+	end_to_end \
+	non_RNA_viral_refseq.fna \
+	$output \
+	-t ${SLURM_CPUS_PER_TASK} \
+	-d /data/umcg-llnext/python_venvs/CheckV_conda/checkv-db-v1.5
 
 conda deactivate
