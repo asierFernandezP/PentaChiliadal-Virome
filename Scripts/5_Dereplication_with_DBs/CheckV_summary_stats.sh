@@ -66,6 +66,12 @@ echo -e "The number of viral sequences from the contigs with more than 1 viral s
 n_multiple_viral_regions_as_viruses=$(grep -wf multiple_viral_region_contigs.txt viruses.fna| wc -l) 
 echo -e "The number of viral sequences from the contigs with more than 1 viral sequence detected and NOT classified as proviruses is: $n_multiple_viral_regions_as_viruses\n"
 
+# 4.Get the summary stats of the final number of sequences/contigs selected after running CheckV
+# CheckV_sequences.fna will contain full contigs or timmed viral regions (
+n_final_sequences=$(cat CheckV_sequences.fna| grep ">" | wc -l)
+echo "The final number of viral sequences/contigs with completeness >50% is: $n_final_sequences"
+echo -e "The final sequences/contigs are available in CheckV_sequences.fna file\n"
+
 # Set permissions
 chmod 440 *_CheckV_contigs.txt *multiple_viral_region_contigs.txt
 
