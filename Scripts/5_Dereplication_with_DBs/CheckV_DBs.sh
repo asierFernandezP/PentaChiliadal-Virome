@@ -26,6 +26,6 @@ checkv \
 	$database \
 	$output \
 	-t ${SLURM_CPUS_PER_TASK} \
-	 -d /data/umcg-llnext/python_venvs/CheckV_conda/checkv-db-v1.5
+	-d /data/umcg-llnext/python_venvs/CheckV_conda/checkv-db-v1.5
 
 conda deactivate
