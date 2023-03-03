@@ -73,7 +73,7 @@ echo "The final number of viral sequences/contigs with completeness >50% is: $n_
 echo -e "The final sequences/contigs are available in CheckV_sequences.fna file\n"
 
 # Set permissions
-chmod 440 *_CheckV_contigs.txt *multiple_viral_region_contigs.txt
+chmod 440 selected_CheckV_contigs.txt filtered_CheckV_contigs.txt
 
 # Move all the generated summary stats files to a folder
 mv *multiple_viral_region_contigs* *CheckV_contigs.txt CheckV_summary_stats_files
