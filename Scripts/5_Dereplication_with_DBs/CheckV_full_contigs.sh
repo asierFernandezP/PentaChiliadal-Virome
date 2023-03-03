@@ -12,6 +12,9 @@ CheckV_dir=$1
 database=$2
 cd $CheckV_dir
 
+#Load modules
+module load seqtk
+
 # Get the names of contigs that will be kept (completeness > 50%) or discarded.
 awk 'NR>1' quality_summary.tsv | awk '$8 != "Low-quality" && $8 != "Not-determined"' | cut -f1 | sort > selected_CheckV_contigs.txt
 awk 'NR>1' quality_summary.tsv | awk '$8 == "Low-quality" || $8 == "Not-determined"' | cut -f1 | sort > filtered_CheckV_contigs.txt
