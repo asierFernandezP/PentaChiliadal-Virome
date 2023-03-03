@@ -1,6 +1,6 @@
 #!/bin/bash
-#SBATCH --job-name=CheckV_summary_stats_processing
-#SBATCH --output=CheckV_stats_proc.out
+#SBATCH --job-name=CheckV_summary_stats
+#SBATCH --output=CheckV_summary.out
 #SBATCH --mem=8gb
 #SBATCH --time=00:19:00
 #SBATCH --cpus-per-task=4
