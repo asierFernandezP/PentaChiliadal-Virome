@@ -23,9 +23,7 @@ echo "The number of proviral sequences detected is: $n_provirus (proviruses.fna 
 sum=$(( $n_provirus + $n_virus ))
 echo -e "The total number of viral/proviral sequences identified by CheckV is: $sum\n"
 
-# Get the summary stats of the total number of contigs to be kept (completeness > 50%) or discarded. Save contig names in files.
-awk 'NR>1' quality_summary.tsv | awk '$8 != "Low-quality" && $8 != "Not-determined"' | cut -f1 | sort > selected_CheckV_contigs.txt
-awk 'NR>1' quality_summary.tsv | awk '$8 == "Low-quality" || $8 == "Not-determined"' | cut -f1 | sort > filtered_CheckV_contigs.txt
+# Get the summary stats of the total number of contigs to be kept (completeness > 50%) or discarded. 
 n_selected_contigs=$(cat selected_CheckV_contigs.txt| wc -l)
 n_filtered_contigs=$(cat filtered_CheckV_contigs.txt| wc -l)
 echo "The total number of contigs with completeness >50% is: $n_selected_contigs"
