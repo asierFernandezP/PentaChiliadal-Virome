@@ -12,7 +12,7 @@ contig_file=$1 #path to FASTA file with the predicted viral contigs
 contig_file_name="$(basename "${contig_file}")" #extract filename
 output=$2 #path to output directory
 
-echo '-------------------- WORKING WITH '${contig_file_name}' DATABASE --------------------'
+echo '-------------------- WORKING WITH '${contig_file_name}' FILE --------------------'
 
 # Clean environment, load modules and activate conda environment
 module purge; ml Anaconda3; module list
