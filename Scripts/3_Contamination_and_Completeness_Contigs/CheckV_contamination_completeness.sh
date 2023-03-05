@@ -1,6 +1,6 @@
 #!/bin/bash
 #SBATCH --job-name=CheckV_contigs
-#SBATCH --output=CheckV_contigs.out
+#SBATCH --output=CheckV_contigs_%j.out
 #SBATCH --mem=64gb
 #SBATCH --time=10-0
 #SBATCH --cpus-per-task=24
