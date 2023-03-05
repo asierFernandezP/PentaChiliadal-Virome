@@ -4,7 +4,8 @@
 #SBATCH --mem=64gb
 #SBATCH --time=10-0
 #SBATCH --cpus-per-task=24
-#SBATCH --open-mode=truncate
+#SBATCH --export=NONE
+#SBATCH --get-user-env=L
 #SBATCH --partition=regular
 
 contig_file=$1 #path to FASTA file with the predicted viral contigs
@@ -17,6 +18,11 @@ source activate /data/umcg-llnext/python_venvs/CheckV_conda; conda list
 export PATH="/data/umcg-llnext/python_venvs/CheckV_conda/prodigal-gv:$PATH"
 
 # Run CheckV
-checkv end_to_end $contig_file $output -t ${SLURM_CPUS_PER_TASK} -d /data/umcg-llnext/python_venvs/CheckV_conda/checkv-db-v1.5
+checkv \
+	end_to_end \
+	$contig_file \
+	$output \
+	-t ${SLURM_CPUS_PER_TASK} \
+	-d /data/umcg-llnext/python_venvs/CheckV_conda/checkv-db-v1.5
 
 conda deactivate
