@@ -1,15 +1,18 @@
 #!/bin/bash
 #SBATCH --job-name=CheckV_contigs
 #SBATCH --output=CheckV_contigs_%j.out
-#SBATCH --mem=64gb
-#SBATCH --time=10-0
+#SBATCH --mem=32gb
+#SBATCH --time=2-0
 #SBATCH --cpus-per-task=24
 #SBATCH --export=NONE
 #SBATCH --get-user-env=L
 #SBATCH --partition=regular
 
 contig_file=$1 #path to FASTA file with the predicted viral contigs
+contig_file_name="$(basename "${contig_file}")" #extract filename
 output=$2 #path to output directory
+
+echo '-------------------- WORKING WITH '${contig_file_name}' DATABASE --------------------'
 
 # Clean environment, load modules and activate conda environment
 module purge; ml Anaconda3; module list
