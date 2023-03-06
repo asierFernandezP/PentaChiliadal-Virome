@@ -26,4 +26,4 @@ seqtk subseq \
     selected_CheckV_contigs.txt > CheckV_sequences.fna
 
 # Set permissions
-chmod 440 CheckV_sequences.fna 
+chmod 440 CheckV_sequences.fna
