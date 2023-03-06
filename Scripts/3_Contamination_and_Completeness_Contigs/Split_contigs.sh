@@ -15,5 +15,5 @@ mkdir split_contigs
 ml BBMap
 partition.sh \
 	in=$contig_file \
-	out=split_contigs/Viral_sequences_%.fa
+	out=split_contigs/Viral_sequences_%.fa \
 	ways=20
