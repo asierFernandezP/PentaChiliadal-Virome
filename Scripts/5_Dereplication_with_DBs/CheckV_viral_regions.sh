@@ -20,7 +20,7 @@ awk 'NR>1' quality_summary.tsv | awk '$8 == "Low-quality" || $8 == "Not-determin
 
 # Remove spaces from the proviruses.fna headers and get the IDs of the proviral sequences that will be selected.
 sed 's, ,_,g' -i proviruses.fna 
-cat selected_CheckV_contigs.txt | grep -Ff - proviruses.fna | cut -c2- > selected_CheckV_proviruses.txt
+cat selected_CheckV_contigs.txt | grep -Fwf - proviruses.fna | cut -c2- > selected_CheckV_proviruses.txt
 
 # Extract from the viruses.fna and proviruses.fna files the sequences with a completeness > 50% estimated by CheckV
 seqtk subseq \
