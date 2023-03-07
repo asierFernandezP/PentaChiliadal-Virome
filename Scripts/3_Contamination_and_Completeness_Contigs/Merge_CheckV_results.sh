@@ -12,14 +12,12 @@ CheckV_output=$1 # CheckV output folder
 mkdir CheckV_merged_results # directory to store results
 
 # Concatenate viruses.fna files
-# Important to use 'NR>1' to avoid concatenating headers
-find . -name "viruses.fna" -type f -exec head -1 {} \; -quit > CheckV_merged_results/viruses.fna
-find $CheckV_output -type f -name "viruses.fna" -exec awk 'NR>1' {} + >> CheckV_merged_results/viruses.fna
+find $CheckV_output -type f -name "viruses.fna" -exec cat {} + >> CheckV_merged_results/viruses.fna
 
 # Concatenate proviruses.fna files
-find . -name "proviruses.fna" -type f -exec head -1 {} \; -quit > CheckV_merged_results/proviruses.fna
-find $CheckV_output -type f -name "proviruses.fna" -exec awk 'NR>1' {} + >> CheckV_merged_results/proviruses.fna
+find $CheckV_output -type f -name "proviruses.fna" -exec cat {} + >> CheckV_merged_results/proviruses.fna
 # Concatenate quality_summary.tsv, contamination.tsv, completeness.tsv and complete_genomes.tsv
+# Important to use 'NR>1' to avoid concatenating headers
 find . -name "quality_summary.tsv" -type f -exec head -1 {} \; -quit > CheckV_merged_results/quality_summary.tsv
 find $CheckV_output -type f -name "quality_summary.tsv" -exec awk 'NR>1' {} + >> CheckV_merged_results/quality_summary.tsv
 find . -name "contamination.tsv" -type f -exec head -1 {} \; -quit > CheckV_merged_results/contamination.tsv
