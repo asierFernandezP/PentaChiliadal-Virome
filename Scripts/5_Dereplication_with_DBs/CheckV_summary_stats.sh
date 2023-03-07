@@ -26,7 +26,7 @@ echo -e "The total number of viral/proviral sequences identified by CheckV is: $
 # Get the summary stats of the total number of contigs to be kept (completeness > 50% and not-determined) or discarded. 
 n_selected_contigs=$(cat selected_CheckV_contigs.txt| wc -l)
 n_filtered_contigs=$(cat filtered_CheckV_contigs.txt| wc -l)
-awk 'NR>1' quality_summary.tsv | grep "no viral genes detected" | grep "Not-determined" | cut -f1 | sort > selected_not_determined_comp_CheckV_contigs.txt
+awk 'NR>1' quality_summary.tsv | grep "Not-determined" | cut -f1 | sort > selected_not_determined_comp_CheckV_contigs.txt
 n_not_det_contigs=$(selected_not_determined_comp_CheckV_contigs.txt| wc -l)
 n_completeness_50_contigs=$(( $n_selected_contigs - $n_not_det_contigs ))
 echo "The total number of contigs with completeness >50% (or not-determined) is: $n_selected_contigs"
