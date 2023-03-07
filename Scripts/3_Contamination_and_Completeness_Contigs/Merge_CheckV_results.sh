@@ -2,7 +2,7 @@
 #SBATCH --job-name=merge_CheckV_results
 #SBATCH --output=merge_CheckV.out
 #SBATCH --mem=4gb
-#SBATCH --time=00:29:59
+#SBATCH --time=00:09:59
 #SBATCH --cpus-per-task=4
 #SBATCH --export=NONE
 #SBATCH --get-user-env=L
