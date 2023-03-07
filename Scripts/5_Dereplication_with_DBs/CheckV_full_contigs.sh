@@ -15,9 +15,9 @@ cd $CheckV_dir
 #Load modules
 module load seqtk; ml list
 
-# Get the names of contigs that will be kept (completeness > 50%) or discarded.
-awk 'NR>1' quality_summary.tsv | awk '$8 != "Low-quality" && $8 != "Not-determined"' | cut -f1 | sort > selected_CheckV_contigs.txt
-awk 'NR>1' quality_summary.tsv | awk '$8 == "Low-quality" || $8 == "Not-determined"' | cut -f1 | sort > filtered_CheckV_contigs.txt
+# Get the names of contigs that will be kept (completeness > 50% or not-determined) or discarded.
+awk 'NR>1' quality_summary.tsv | awk '$8 != "Low-quality"' | cut -f1 | sort > selected_CheckV_contigs.txt
+awk 'NR>1' quality_summary.tsv | awk '$8 == "Low-quality"' | cut -f1 | sort > filtered_CheckV_contigs.txt
 
 # Extract from the FASTA file of the DB the sequences with a completeness > 50% estimated by CheckV
 seqtk subseq \
