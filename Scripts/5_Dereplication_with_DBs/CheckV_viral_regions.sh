@@ -14,19 +14,23 @@ cd $CheckV_dir
 #Load modules
 module load seqtk; ml list
 
-# Get the names of contigs whose viral regions will be kept (completeness > 50%) or discarded.
+# Get the names of contigs whose viral regions will be selected (completeness > 50%) or discarded.
 awk 'NR>1' quality_summary.tsv | awk '$8 != "Low-quality" && $8 != "Not-determined"' | cut -f1 | sort > selected_CheckV_contigs.txt
 awk 'NR>1' quality_summary.tsv | awk '$8 == "Low-quality" || $8 == "Not-determined"' | cut -f1 | sort > filtered_CheckV_contigs.txt
+
+#Get the IDs of the sequences in proviruses.fna that will be selected.
+cat selected_CheckV_contigs.txt | grep -Ff - ../proviruses.fna | cut -c2- > selected_Check_proviruses.txt
 
 # Extract from the viruses.fna and proviruses.fna files the sequences with a completeness > 50% estimated by CheckV
 seqtk subseq \
     -l 80 \
     viruses.fna \
     selected_CheckV_contigs.txt > CheckV_sequences.fna
+    
 seqtk subseq \
     -l 80 \
     proviruses.fna \
-    selected_CheckV_contigs.txt >> CheckV_sequences.fna    
+    selected_Check_proviruses.txt >> CheckV_sequences.fna    
     
 # Set permissions
 chmod 440 CheckV_sequences.fna 
