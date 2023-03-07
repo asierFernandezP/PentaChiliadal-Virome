@@ -9,8 +9,8 @@
 #SBATCH --partition=short
 
 CheckV_output=$1 # CheckV output folder
+mkdir CheckV_merged_results # directory to store results
 
-# Move all result folders from the 20 partitions to the same directory
 # Concatenate viruses.fna files
 find $CheckV_output -type f -name "viruses.fna" -exec cat {} + >> CheckV_merged_results/viruses.fna
 # Concatenate proviruses.fna files
