@@ -19,7 +19,7 @@ module purge; module load BLAST+; module list
 makeblastdb \
     -dbtype 'nucl' \
     -in $viral_fragments_file \
-    -out ${viral_fragments_file}_db
+    -out ${viral_file_name}_db
 
 # Next, use megablast from blast+ package to perform all-vs-all blastn of sequences:
 # Using the SILVA_138.1_SSURef_NR99 DB
