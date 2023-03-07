@@ -26,8 +26,13 @@ echo -e "The total number of viral/proviral sequences identified by CheckV is: $
 # Get the summary stats of the total number of contigs to be kept (completeness > 50%) or discarded. 
 n_selected_contigs=$(cat selected_CheckV_contigs.txt| wc -l)
 n_filtered_contigs=$(cat filtered_CheckV_contigs.txt| wc -l)
-echo "The total number of contigs with completeness >50% is: $n_selected_contigs"
-echo -e "The total number of contigs with completeness =<50% is: $n_filtered_contigs\n"
+echo "The total number of contigs with completeness >50% (or not-determined) is: $n_selected_contigs"
+echo "The total number of contigs with completeness =<50% is: $n_filtered_contigs"
+
+# Get the summary stats of the total number of contigs with not-determined completeness (we will keep them) 
+awk 'NR>1' quality_summary.tsv | grep "no viral genes detected" | grep "Not-determined" | cut -f1 | sort > selected_not_determined_comp_CheckV_contigs.txt
+n_not_det_contigs=$(selected_not_determined_comp_CheckV_contigs.txt| wc -l)
+echo -e "The total number of contigs with not-determined completeness is: $n_not_det_contigs\n"
 
 # 2. Get the file and summary stats of viral contigs selected (completeness > 50%) but with 0 viral genes
 awk 'NR>1' quality_summary.tsv | grep "no viral genes detected" | grep "Complete\|High-quality\|Medium-quality" | cut -f1 | sort > selected_nonviralgenes_CheckV_contigs.txt
@@ -67,7 +72,7 @@ echo -e "The number of viral sequences from the contigs with more than 1 viral s
 # 4.Get the summary stats of the final number of sequences/contigs selected after running CheckV
 # CheckV_sequences.fna will contain full contigs (CheckV_full_contigs.sh) or trimmed viral regions (CheckV_viral_regions.sh).
 n_final_sequences=$(cat CheckV_sequences.fna| grep ">" | wc -l)
-echo "The final number of viral sequences/contigs with completeness >50% is: $n_final_sequences"
+echo "The final number of viral sequences/contigs with completeness >50% (or not-determined) is: $n_final_sequences"
 echo -e "The final sequences/contigs are available in CheckV_sequences.fna file\n"
 
 # Set permissions
