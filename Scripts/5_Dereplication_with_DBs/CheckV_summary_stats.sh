@@ -74,5 +74,5 @@ echo -e "The final sequences/contigs are available in CheckV_sequences.fna file\
 chmod 440 selected_CheckV_contigs.txt filtered_CheckV_contigs.txt
 
 # Move all the generated summary stats files to a folder
-mv *multiple_viral_region_contigs* *CheckV_contigs.txt CheckV_summary_stats_files
+mv *multiple_viral_region_contigs* *CheckV_contigs.txt *CheckV_proviruses.txt CheckV_summary_stats_files
 echo -e "########################################### END ###########################################\n"
