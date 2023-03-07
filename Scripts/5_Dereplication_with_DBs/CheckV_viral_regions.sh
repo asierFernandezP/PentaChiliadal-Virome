@@ -14,9 +14,9 @@ cd $CheckV_dir
 #Load modules
 module load seqtk; ml list
 
-# Get the names of contigs whose viral regions will be selected (completeness > 50%) or discarded.
-awk 'NR>1' quality_summary.tsv | awk '$8 != "Low-quality" && $8 != "Not-determined"' | cut -f1 | sort > selected_CheckV_contigs.txt
-awk 'NR>1' quality_summary.tsv | awk '$8 == "Low-quality" || $8 == "Not-determined"' | cut -f1 | sort > filtered_CheckV_contigs.txt
+# Get the names of contigs whose viral regions will be selected (completeness > 50% or not-determined) or discarded.
+awk 'NR>1' quality_summary.tsv | awk '$8 != "Low-quality"' | cut -f1 | sort > selected_CheckV_contigs.txt
+awk 'NR>1' quality_summary.tsv | awk '$8 == "Low-quality"' | cut -f1 | sort > filtered_CheckV_contigs.txt
 
 # Remove spaces from the proviruses.fna headers and get the IDs of the proviral sequences that will be selected.
 sed 's, ,_,g' proviruses.fna > proviruses_mod.fna 
