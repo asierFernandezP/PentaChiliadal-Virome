@@ -23,16 +23,16 @@ echo "The number of proviral sequences detected is: $n_provirus (proviruses.fna 
 sum=$(( $n_provirus + $n_virus ))
 echo -e "The total number of viral/proviral sequences identified by CheckV is: $sum\n"
 
-# Get the summary stats of the total number of contigs to be kept (completeness > 50%) or discarded. 
+# Get the summary stats of the total number of contigs to be kept (completeness > 50% and not-determined) or discarded. 
 n_selected_contigs=$(cat selected_CheckV_contigs.txt| wc -l)
 n_filtered_contigs=$(cat filtered_CheckV_contigs.txt| wc -l)
-echo "The total number of contigs with completeness >50% (or not-determined) is: $n_selected_contigs"
-echo "The total number of contigs with completeness =<50% is: $n_filtered_contigs"
-
-# Get the summary stats of the total number of contigs with not-determined completeness (we will keep them) 
 awk 'NR>1' quality_summary.tsv | grep "no viral genes detected" | grep "Not-determined" | cut -f1 | sort > selected_not_determined_comp_CheckV_contigs.txt
 n_not_det_contigs=$(selected_not_determined_comp_CheckV_contigs.txt| wc -l)
+n_completeness_50_contigs=$(( $n_selected_contigs - $n_not_det_contigs ))
+echo "The total number of contigs with completeness >50% (or not-determined) is: $n_selected_contigs"
+echo "The total number of contigs with completeness >50% is: $n_completeness_50_contigs"
 echo -e "The total number of contigs with not-determined completeness is: $n_not_det_contigs\n"
+echo "The total number of contigs with completeness =<50% is: $n_filtered_contigs"
 
 # 2. Get the file and summary stats of viral contigs selected (completeness > 50%) but with 0 viral genes
 awk 'NR>1' quality_summary.tsv | grep "no viral genes detected" | grep "Complete\|High-quality\|Medium-quality" | cut -f1 | sort > selected_nonviralgenes_CheckV_contigs.txt
