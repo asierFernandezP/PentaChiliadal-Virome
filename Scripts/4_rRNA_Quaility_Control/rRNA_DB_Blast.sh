@@ -36,7 +36,7 @@ blastn \
 blastn \
 			 -task 'blastn' \
 			 -evalue 0.001 \
-			 -query /data/umcg-tifn/DATABASES/SILVA/SILVA_138.1_LSURef_NR99_tax_silva.fasta
+			 -query /data/umcg-tifn/DATABASES/SILVA/SILVA_138.1_LSURef_NR99_tax_silva.fasta \
 			 -db ${viral_file_name}_db \
 			 -outfmt '6 qseqid sseqid pident length mismatch gapopen qstart qend sstart send evalue bitscore nident qlen slen' \
 			 -out ${viral_file_name}_SILVA_LSU_blast.tsv \
