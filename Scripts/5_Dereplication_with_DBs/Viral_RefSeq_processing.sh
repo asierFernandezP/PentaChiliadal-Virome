@@ -1,8 +1,8 @@
 #!/bin/bash
 #SBATCH --job-name=Viral_RefSeq_proc
 #SBATCH --output=Viral_RefSeq_proc.out
-#SBATCH --mem=2gb
-#SBATCH --time=00:29:00
+#SBATCH --mem=1gb
+#SBATCH --time=00:05:00
 #SBATCH --cpus-per-task=8
 #SBATCH --export=NONE
 #SBATCH --get-user-env=L
