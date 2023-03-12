@@ -25,7 +25,7 @@ comm -13 Viral_LSU_contigs.txt Viral_SSU_contigs.txt >> Viral_rRNA_contigs.txt
 
 # Exclude rRNA contigs from FASTA file with predicted viral regions 
 grep '>' $viral_fragments_file | sed 's/^>//' | sort > Viral_all_contigs.txt
-comm -13 Viral_rRNA_contigs.txt Viral_all_contigs.txt > ${viral_file_name}_no_rRNA_contigs.txt
+sort Viral_rRNA_contigs.txt | comm -13 - Viral_all_contigs.txt > ${viral_file_name}_no_rRNA_contigs.txt
 
 seqtk subseq \
     -l 80 \
