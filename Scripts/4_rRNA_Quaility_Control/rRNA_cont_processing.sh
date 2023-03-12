@@ -1,12 +1,12 @@
 #!/bin/bash
 #SBATCH --job-name=rRNA_cont_processing
 #SBATCH --output=rRNA_cont_processing.out
-#SBATCH --mem=4gb
-#SBATCH --time=01:00:00
+#SBATCH --mem=1gb
+#SBATCH --time=00:29:00
 #SBATCH --cpus-per-task=4
 #SBATCH --export=NONE
 #SBATCH --get-user-env=L
-#SBATCH --partition=regular
+#SBATCH --partition=short
 
 # Clean environment, load seqtk
 module purge; module load seqtk; module list
