@@ -1,8 +1,8 @@
 #!/bin/bash
 #SBATCH --job-name=rRNA_DB
 #SBATCH --output=rRNA_DB.out
-#SBATCH --mem=64gb
-#SBATCH --time=7-0
+#SBATCH --mem=8gb
+#SBATCH --time=3-0
 #SBATCH --cpus-per-task=24
 #SBATCH --export=NONE
 #SBATCH --get-user-env=L
