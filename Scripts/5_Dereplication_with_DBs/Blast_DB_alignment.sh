@@ -27,4 +27,4 @@ blastn \
 	-outfmt '6 std qlen slen' \
 	-max_target_seqs 10000 \
 	-out ${contig_file_name}_blast.tsv \
-	-num_threads 24
+	-num_threads ${SLURM_CPUS_PER_TASK}
