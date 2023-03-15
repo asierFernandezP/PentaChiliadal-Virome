@@ -18,7 +18,7 @@ module purge; ml BLAST+/2.12.0-gompi-2021b
 makeblastdb \
 	-in $contig_file \
 	-dbtype nucl \
-	-out ${contig_file_name}_db.fa
+	-out ${contig_file_name}_db
 
 #Next, use megablast from blast+ package to perform all-vs-all blastn of sequences:
 blastn \
