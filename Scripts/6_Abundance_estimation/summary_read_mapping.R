@@ -26,4 +26,4 @@ for (sample in sample_names) {
 }
 
 # Write abundance table
-write.table(results_table, file="PentaChiliadal_4628_Abundance_Table_23042023.txt", sep = "\t")
+write.table(results_table, file="PentaChiliadal_4628_Abundance_Table_STEP6.txt", sep = "\t")
