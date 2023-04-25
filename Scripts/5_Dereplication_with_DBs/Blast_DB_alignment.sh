@@ -1,18 +1,18 @@
 #!/bin/bash
-#SBATCH --job-name=CheckV_der_contigs
-#SBATCH --output=CheckV_der_contigs.out
-#SBATCH --mem=64gb
-#SBATCH --time=2-0
+#SBATCH --job-name=Blast_DB_alignment
+#SBATCH --output=Blast_DB_alignment.out
+#SBATCH --mem=200gb
+#SBATCH --time=6-0
 #SBATCH --cpus-per-task=24
 #SBATCH --open-mode=truncate
 #SBATCH --partition=regular
 
 contig_file=$1 #path to FASTA file with predicted viral contigs
-contig_file_name="$(basename "${contig_file}")" #extract filename 
-contig_file_name="${contig_file_name%.*}" #extract filename without the extension      
+contig_file_name="$(basename "${contig_file}")" #extract filename
+contig_file_name="${contig_file_name%.*}" #extract filename without the extension
 
 # Load BLAST
-module purge; ml BLAST+/2.12.0-gompi-2021b
+module purge; ml BLAST+/2.13.0-gompi-2022a
 
 #First, create a blast+ database:
 makeblastdb \
