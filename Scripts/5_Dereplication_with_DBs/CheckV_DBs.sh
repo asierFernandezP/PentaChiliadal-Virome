@@ -2,7 +2,7 @@
 #SBATCH --job-name=CheckV_DB
 #SBATCH --output=CheckV_%j.out
 #SBATCH --mem=32gb
-#SBATCH --time=4-0
+#SBATCH --time=3-0
 #SBATCH --cpus-per-task=16
 #SBATCH --export=NONE
 #SBATCH --get-user-env=L
