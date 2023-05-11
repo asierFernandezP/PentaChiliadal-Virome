@@ -11,8 +11,9 @@
 CheckV_dir=$1
 cd $CheckV_dir
 
-#Load modules
-module load seqtk; ml list
+# Clean environment, load modules and activate conda environment
+module purge; ml Anaconda3; module list
+source activate /home2/p304845/Conda_envs/Seqtk_conda/; conda list
 
 # Get the names of contigs whose viral regions will be selected (completeness > 50% or not-determined) or discarded.
 awk 'NR>1' quality_summary.tsv | awk '$8 != "Low-quality"' | cut -f1 | sort > selected_CheckV_contigs.txt
