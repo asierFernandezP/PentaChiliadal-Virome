@@ -1,7 +1,7 @@
 #!/bin/bash
 #SBATCH --job-name=CheckV_viral_regions_merging
 #SBATCH --output=CheckV_reg_merge.out
-#SBATCH --mem=8gb
+#SBATCH --mem=2gb
 #SBATCH --time=00:19:00
 #SBATCH --cpus-per-task=4
 #SBATCH --export=NONE
