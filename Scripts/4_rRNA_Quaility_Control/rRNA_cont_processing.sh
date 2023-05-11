@@ -6,10 +6,11 @@
 #SBATCH --cpus-per-task=4
 #SBATCH --export=NONE
 #SBATCH --get-user-env=L
-#SBATCH --partition=short
+#SBATCH --partition=regular
 
-# Clean environment, load seqtk
-module purge; module load seqtk; module list
+# Clean environment, load modules and activate conda environment
+module purge; ml Anaconda3; module list
+source activate /home2/p304845/Conda_envs/Seqtk_conda/; conda list
 
 viral_fragments_file=$1 #path to output FASTA file with viral fragments (STEP3)
 viral_file_name="$(basename "${viral_fragments_file}")" #extract filename
