@@ -1,7 +1,7 @@
 #!/bin/bash
 #SBATCH --job-name=CheckV_full_contigs
 #SBATCH --output=CheckV_full_contigs.out
-#SBATCH --mem=8gb
+#SBATCH --mem=2gb
 #SBATCH --time=00:19:00
 #SBATCH --cpus-per-task=4
 #SBATCH --export=NONE
