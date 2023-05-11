@@ -1,7 +1,7 @@
 #!/bin/bash
 #SBATCH --job-name=CheckV_summary_stats
 #SBATCH --output=CheckV_summary.out
-#SBATCH --mem=8gb
+#SBATCH --mem=2gb
 #SBATCH --time=00:19:00
 #SBATCH --cpus-per-task=4
 #SBATCH --export=NONE
@@ -23,16 +23,14 @@ echo "The number of proviral sequences detected is: $n_provirus (proviruses.fna 
 sum=$(( $n_provirus + $n_virus ))
 echo -e "The total number of viral/proviral sequences identified by CheckV is: $sum\n"
 
-# Get the summary stats of the total number of contigs to be kept (completeness > 50% and not-determined) or discarded. 
+# Get the summary stats of the total number of contigs to be kept (completeness > 50%) or discarded. 
 n_selected_contigs=$(cat selected_CheckV_contigs.txt| wc -l)
 n_filtered_contigs=$(cat filtered_CheckV_contigs.txt| wc -l)
-awk 'NR>1' quality_summary.tsv | grep "Not-determined" | cut -f1 | sort > selected_not_determined_comp_CheckV_contigs.txt
-n_not_det_contigs=$(cat selected_not_determined_comp_CheckV_contigs.txt| wc -l)
-n_completeness_50_contigs=$(( $n_selected_contigs - $n_not_det_contigs ))
-echo "The total number of contigs with completeness >50% (or not-determined) is: $n_selected_contigs"
-echo "The total number of contigs with completeness >50% is: $n_completeness_50_contigs"
+awk 'NR>1' quality_summary.tsv | grep "Not-determined" | cut -f1 | sort > not_determined_comp_CheckV_contigs.txt
+n_not_det_contigs=$(cat not_determined_comp_CheckV_contigs.txt| wc -l)
+echo "The total number of contigs with completeness >50% is: $n_selected_contigs"
 echo -e "The total number of contigs with not-determined completeness is: $n_not_det_contigs\n"
-echo "The total number of contigs with completeness =<50% is: $n_filtered_contigs"
+echo "The total number of contigs with completeness =<50% (including Not-determined) is: $n_filtered_contigs"
 
 # 2. Get the file and summary stats of viral contigs selected (completeness > 50%) but with 0 viral genes
 awk 'NR>1' quality_summary.tsv | grep "no viral genes detected" | grep "Complete\|High-quality\|Medium-quality" | cut -f1 | sort > selected_nonviralgenes_CheckV_contigs.txt
@@ -51,19 +49,19 @@ echo -e "The number of viral sequences from the contigs with more than 1 viral s
 
 # Get a list of contigs with more than 1 viral region detected with low quality/undetermined (will be filtered)
 # Print the number of contigs and the number of viral regions
-awk 'NR>1' quality_summary.tsv | grep ">1 viral region detected" | awk '$8 == "Low-quality" || $8 == "Not-determined"' | cut -f1 | sort > low_q_multiple_viral_region_contigs.txt
-n_multiple_viral_region_contigs_low_q=$(cat low_q_multiple_viral_region_contigs.txt| wc -l)
-n_multiple_viral_regions_low_q=$(sed 's/.*/&_/' low_q_multiple_viral_region_contigs.txt | grep -f - proviruses.fna | wc -l) #sed adds an underscore at the end of each line
-echo "The number of contigs with more than 1 viral sequence detected and with low quality is: $n_multiple_viral_region_contigs_low_q"
-echo -e "The number of viral sequences from the contigs with more than 1 viral sequence detected and with low quality is: $n_multiple_viral_regions_low_q\n"
+awk 'NR>1' quality_summary.tsv | grep ">1 viral region detected" | awk '$8 == "Low-quality" || $8 == "Not-determined"' | cut -f1 | sort > filtered_multiple_viral_region_contigs.txt
+n_multiple_viral_region_contigs_filtered=$(cat filtered_multiple_viral_region_contigs.txt| wc -l)
+n_multiple_viral_regions_filtered=$(sed 's/.*/&_/' filtered_multiple_viral_region_contigs.txt | grep -f - proviruses.fna | wc -l) #sed adds an underscore at the end of each line
+echo "The number of contigs with more than 1 viral sequence detected and with low/undetermined quality is: $n_multiple_viral_region_contigs_filtered"
+echo -e "The number of viral sequences from the contigs with more than 1 viral sequence detected and with low/undetermined quality is: $n_multiple_viral_regions_filtered\n"
 
 # Get a list of contigs with more than 1 viral region detected with medium/high-quality (or complete) (will be kept)
 # Print the number of contigs and the number of viral regions
 awk 'NR>1' quality_summary.tsv | grep ">1 viral region detected" | awk '$8 != "Low-quality" && $8 != "Not-determined"' | cut -f1 | sort > selected_multiple_viral_region_contigs.txt
 n_multiple_viral_region_contigs_high_q=$(cat selected_multiple_viral_region_contigs.txt| wc -l)
 n_multiple_viral_regions_high_q=$(sed 's/.*/&_/' selected_multiple_viral_region_contigs.txt | grep -f - proviruses.fna| wc -l) #sed adds an underscore at the end of each line
-echo "The number of contigs with more than 1 viral sequence detected and with high quality is: $n_multiple_viral_region_contigs_high_q"
-echo -e "The number of viral sequences from the contigs with more than 1 viral sequence detected and with high quality is: $n_multiple_viral_regions_high_q\n"
+echo "The number of contigs with more than 1 viral sequence detected and with medium/high/complete quality is: $n_multiple_viral_region_contigs_high_q"
+echo -e "The number of viral sequences from the contigs with more than 1 viral sequence detected and with medium/high/complete quality is: $n_multiple_viral_regions_high_q\n"
 
 # Double check that all the contigs with multiple viral regions are classified as proviruses
 n_multiple_viral_regions_as_viruses=$(grep -wf multiple_viral_region_contigs.txt viruses.fna| wc -l) 
@@ -72,7 +70,7 @@ echo -e "The number of viral sequences from the contigs with more than 1 viral s
 # 4.Get the summary stats of the final number of sequences/contigs selected after running CheckV
 # CheckV_sequences.fna will contain full contigs (CheckV_full_contigs.sh) or trimmed viral regions (CheckV_viral_regions.sh).
 n_final_sequences=$(cat CheckV_sequences.fna| grep ">" | wc -l)
-echo "The final number of viral sequences/contigs with completeness >50% (or not-determined) is: $n_final_sequences"
+echo "The final number of viral sequences/contigs with completeness >50% is: $n_final_sequences"
 echo -e "The final sequences/contigs are available in CheckV_sequences.fna file\n"
 
 # Set permissions
