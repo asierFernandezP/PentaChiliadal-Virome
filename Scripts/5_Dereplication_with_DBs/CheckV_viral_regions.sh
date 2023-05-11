@@ -6,7 +6,7 @@
 #SBATCH --cpus-per-task=4
 #SBATCH --export=NONE
 #SBATCH --get-user-env=L
-#SBATCH --partition=short
+#SBATCH --partition=regular
 
 CheckV_dir=$1
 cd $CheckV_dir
