@@ -2,7 +2,7 @@
 #SBATCH --job-name=rRNA_DB
 #SBATCH --output=rRNA_DB.out
 #SBATCH --mem=8gb
-#SBATCH --time=3-0
+#SBATCH --time=2-0
 #SBATCH --cpus-per-task=24
 #SBATCH --export=NONE
 #SBATCH --get-user-env=L
