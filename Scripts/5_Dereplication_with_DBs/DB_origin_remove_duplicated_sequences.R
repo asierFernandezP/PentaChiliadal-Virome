@@ -1,5 +1,5 @@
 ################################################################################
-##### Check DB of origin of viral sequences and remove duplicated viruses
+##### Check DB of origin of viral sequences and duplicated viruses
 ### Author(s):Asier Fernández
 ### Last updated: 12th May, 2023
 ################################################################################
