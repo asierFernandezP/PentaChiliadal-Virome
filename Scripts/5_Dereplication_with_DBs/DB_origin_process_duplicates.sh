@@ -22,7 +22,7 @@ cat $viral_fasta_dir/*fasta >> STEP5_input_sequences.fa
 # Extract the IDs of all the viral sequences to be used for dereplication
 seqkit seq -n STEP5_input_sequences.fa > STEP5_input_sequences.txt
 
-# Execute the R script 
+# Execute the R script
 Rscript DB_origin_check_duplicated_sequences.R STEP5_input_sequences.txt
 
 # Remove duplicated sequences
