@@ -1,6 +1,6 @@
 # Get names of viral genomes and samples from command line arguments
 args <- commandArgs(trailingOnly = TRUE)
-viral_DB_origin <- readLines(args[1]) # file with the names of all viral sequences to be used as input for dereplication
+viral_DB_origin <- data.frame(readLines(args[1])) # file with the names of all viral sequences to be used as input for dereplication
 
 # Add DB information
 # Important things to consider:
