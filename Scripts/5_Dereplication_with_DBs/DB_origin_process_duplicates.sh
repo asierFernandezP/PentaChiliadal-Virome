@@ -25,5 +25,9 @@ seqtk seq -n STEP5_input_sequences.fa > STEP5_input_sequences.txt
 # Execute the R script 
 Rscript DB_origin_check_duplicated_sequences.R STEP5_input_sequences.txt
 
+# Clean environment, load modules and activate conda environment
+module purge; ml Anaconda3
+source activate /home2/p304845/Conda_envs/Seqkit_conda_env/; conda list
+
 # Remove duplicated sequences
-seqtk rmdup STEP5_input_sequences.fa > STEP5_combined_sequences_nodup.fa
+seqkit rmdup -n < STEP5_input_sequences.fa > STEP5_combined_sequences_nodup.fa
