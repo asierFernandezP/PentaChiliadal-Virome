@@ -3,11 +3,7 @@ args <- commandArgs(trailingOnly = TRUE)
 viral_DB_origin <- read.delim(args[1], header=F) # file with the names of all viral sequences to be used as input for dereplication
 
 # Add DB information
-# Important things to consider:
-# Yutin DB has "NC_021803  Cellulophaga phage phi13:2, complete genome" and "NC_021798 Cellulophaga phage phi17:2, complete genome"
-# Viral RefSeq has "NC_021803.1 Cellulophaga phage phi13:2, complete genome" and "NC_021798.1 Cellulophaga phage phi17:2, complete genome" 
-# 8 duplicated sequences between Yutin-Guerin DBs:ERR844030_ms_1, ERR975045_s_1, Fferm_ms_11, HvCF_A6_ms_4, IAS_virus_KJ003983
-# Inf125_s_2, Sib1_ms_5, SRR4295175_ms_5
+colnames(viral_DB_origin)[1] <- "viral_seq"
 viral_DB_origin$DB <- NA
 viral_DB_origin[,"DB"] [grep("^[ABCDY].*NODE", viral_DB_origin$viral_seq)] <- "LLNEXT" # 96,376
 viral_DB_origin[,"DB"] [grep("MGV-GENOME", viral_DB_origin$viral_seq)] <- "MGV" #189,680
