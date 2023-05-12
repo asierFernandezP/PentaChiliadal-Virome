@@ -1,15 +1,6 @@
-################################################################################
-##### Check DB of origin of viral sequences and duplicated viruses
-### Author(s):Asier Fernández
-### Last updated: 12th May, 2023
-################################################################################
-
-# Set working directory
-setwd("~/Desktop/PhD/Projects/Virome LL-Next/Analysis/Remove duplicates input STEP 5/")
-
-# Read file with all the sequence IDs to be used for dereplication
-viral_DB_origin <-  read.delim("STEP5_input_sequences.txt", header =F) 
-colnames(viral_DB_origin)[1] <- "viral_seq"
+# Get names of viral genomes and samples from command line arguments
+args <- commandArgs(trailingOnly = TRUE)
+viral_DB_origin <- readLines(args[1]) # file with the names of all viral sequences to be used as input for dereplication
 
 # Add DB information
 # Important things to consider:
@@ -33,7 +24,8 @@ viral_DB_origin[,"DB"][which(is.na(viral_DB_origin$DB))] <- "Yutin" #656
 virus_duplicated <- viral_DB_origin[duplicated(viral_DB_origin$viral_seq), "viral_seq"]
 deduplicated_viral_DB_origin <- viral_DB_origin[!duplicated(viral_DB_origin$viral_seq), ]
 deduplicated_viral_DB_origin$DB [which(deduplicated_viral_DB_origin$viral_seq %in% virus_duplicated)] <- "Guerin_Yutin"
+cat("The duplicated sequences are:", virus_duplicated)
 
-# Save final with the 381,522 sequences used as input for STEP5 dereplication (including 5 NEG-CONTROLS)
+# Save final file with the 381,522 sequences used as input for STEP5 dereplication and their DB of origin (including 5 NEG-CONTROLS)
 write.table(deduplicated_viral_DB_origin,"STEP5_input_sequences_nodup_DB_origin.txt", sep = "\t", 
             row.names = F, col.names = F, quote = FALSE)
