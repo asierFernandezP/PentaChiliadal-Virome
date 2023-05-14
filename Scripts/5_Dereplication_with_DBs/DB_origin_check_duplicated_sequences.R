@@ -29,11 +29,9 @@ cat("The duplicated sequences are:", virus_duplicated)
 deduplicated_viral_DB_origin$new_viral_ID <- ave(deduplicated_viral_DB_origin$DB, deduplicated_viral_DB_origin$DB, 
                        FUN = function(x) paste0(x, "_", seq_along(x)))
 
-for (i in 1:nrow(deduplicated_viral_DB_origin)) {
-  if (grepl("/",deduplicated_viral_DB_origin$viral_seq[i])) {
-    deduplicated_viral_DB_origin$new_viral_ID[i] <- paste0(deduplicated_viral_DB_origin$new_viral_ID[i], "_prophage")
-  }
-}
+deduplicated_viral_DB_origin$new_viral_ID <- ifelse(grepl("/", deduplicated_viral_DB_origin$viral_seq),
+                                                    paste0(deduplicated_viral_DB_origin$new_viral_ID, "_prophage"),
+                                                    deduplicated_viral_DB_origin$new_viral_ID)
 
 # Save final file with the 381,522 sequences used as input for STEP5 dereplication and their DB of origin (including 5 NEG-CONTROLS)
 write.table(deduplicated_viral_DB_origin,"STEP5_input_sequences_nodup_DB_origin.txt", sep = "\t", 
