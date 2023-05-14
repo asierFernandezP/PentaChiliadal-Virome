@@ -1,9 +1,14 @@
 # Load R packages
 library(stats)
+library(Biostrings)
+library(data.table)
 
-# Get names of viral genomes and samples from command line arguments
+# Get FASTA file of viral genomes from command line arguments
 args <- commandArgs(trailingOnly = TRUE)
-viral_DB_origin <- read.delim(args[1], header=F) # file with the names of all viral sequences to be used as input for dereplication
+viral_sequences <- readDNAStringSet(args[1]) # FASTA file with the viral sequences 
+
+# Get sequence IDs
+viral_DB_origin <- data.frame(names(viral_sequences))
 
 # Add DB information
 colnames(viral_DB_origin)[1] <- "viral_seq"
@@ -33,6 +38,15 @@ deduplicated_viral_DB_origin$new_viral_ID <- ifelse(grepl("/", deduplicated_vira
                                                     paste0(deduplicated_viral_DB_origin$new_viral_ID, "_prophage"),
                                                     deduplicated_viral_DB_origin$new_viral_ID)
 
-# Save final file with the 381,522 sequences used as input for STEP5 dereplication and their DB of origin (including 5 NEG-CONTROLS)
+# Remove sequences with duplicate IDs from the FASTA file
+viral_sequences_no_dup <- viral_sequences[unique(names(viral_sequences))]
+
+# Replace the IDs in the FASTA file with the new simplified IDs
+names(viral_sequences_no_dup) <- deduplicated_viral_DB_origin$new_viral_ID
+
+# Save final table with the 381,522 sequences used as input for STEP5 dereplication and their DB of origin (including 5 NEG-CONTROLS)
 write.table(deduplicated_viral_DB_origin,"STEP5_input_sequences_nodup_DB_origin.txt", sep = "\t", 
             row.names = F, col.names = F, quote = FALSE)
+
+# Save the updated FASTA file
+writeXStringSet(viral_sequences_no_dup, "STEP5_combined_sequences_nodup_renamed.fa")
