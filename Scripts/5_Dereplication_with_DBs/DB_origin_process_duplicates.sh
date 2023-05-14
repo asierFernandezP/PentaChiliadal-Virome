@@ -1,12 +1,12 @@
 #!/bin/bash
 #SBATCH --job-name=DB_origin_process_duplicates
 #SBATCH --output=DB_process_duplicates.out
-#SBATCH --mem=4gb
+#SBATCH --mem=40gb
 #SBATCH --time=00:19:00
-#SBATCH --cpus-per-task=4
+#SBATCH --cpus-per-task=16
 #SBATCH --export=NONE
 #SBATCH --get-user-env=L
-#SBATCH --partition=regular
+#SBATCH --partition=himem
 
 viral_fasta_dir=$1 # directory with all the FASTA files to be used as input for dereplication
 
@@ -23,7 +23,7 @@ cat $viral_fasta_dir/*fasta >> STEP5_input_sequences.fa
 seqkit seq -n STEP5_input_sequences.fa > STEP5_input_sequences.txt
 
 # Execute the R script
-Rscript DB_origin_check_duplicated_sequences.R STEP5_input_sequences.txt
+Rscript DB_origin_check_duplicated_sequences.R STEP5_input_sequences.txt STEP5_input_sequences.fa
 
-# Remove duplicated sequences
-seqkit rmdup -n < STEP5_input_sequences.fa > STEP5_combined_sequences_nodup.fa
+# Set permissions
+chmod 440 STEP5_combined_sequences_nodup_renamed.fa STEP5_input_sequences_nodup_DB_origin.txt
