@@ -5,7 +5,7 @@
 #SBATCH --time=00:29:00
 #SBATCH --cpus-per-task=4
 #SBATCH --open-mode=truncate
-#SBATCH --partition=short
+#SBATCH --partition=regular
 
 clusters=$1 #CheckV aniclust.py STEP5_combined_sequences_clusters.tsv output file
 neg_control=$2 #FASTA file with viral contigs predicted in the negative control sample
