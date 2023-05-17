@@ -15,8 +15,9 @@ viral_genomes_file_path="$(dirname "${viral_genomes_file}")" #extract path
 viral_genomes_file_name="$(basename "${viral_genomes_file}")" #extract filename
 viral_genomes_file_name="${viral_genomes_file_name%.*}" #extract filename without the extension
 
-#Load Python module
-ml purge; ml Python/3.10.4-GCCcore-11.3.0 seqtk; ml list
+# Clean environment, load modules and activate conda environment
+module purge; ml Anaconda3; module list
+source activate /home2/p304845/Conda_envs/Seqtk_conda/; conda list
 
 #Extract the names of the predicted viral sequences in the negative control sample
 cat $neg_control | grep ">" | sed 's/^>//' > neg_control_IDs.txt
