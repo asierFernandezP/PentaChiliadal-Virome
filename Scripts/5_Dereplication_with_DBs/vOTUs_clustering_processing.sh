@@ -4,12 +4,12 @@
 #SBATCH --mem=4gb
 #SBATCH --time=00:29:00
 #SBATCH --cpus-per-task=4
-#SBATCH --open-mode=truncate
+#SBATCH --export=NONE
+#SBATCH --get-user-env=L
 #SBATCH --partition=regular
 
 clusters=$1 #CheckV aniclust.py STEP5_combined_sequences_clusters.tsv output file
-neg_control=$2 #FASTA file with viral contigs predicted in the negative control sample
-viral_genomes_file=$3 #file with all the viral genomes used as input for the dereplication
+viral_genomes_file=$2 #file with all the viral genomes used as input for the dereplication
 
 viral_genomes_file_path="$(dirname "${viral_genomes_file}")" #extract path
 viral_genomes_file_name="$(basename "${viral_genomes_file}")" #extract filename
@@ -20,7 +20,7 @@ module purge; ml Anaconda3; module list
 source activate /home2/p304845/Conda_envs/Seqtk_conda/; conda list
 
 #Extract the names of the predicted viral sequences in the negative control sample
-cat $neg_control | grep ">" | sed 's/^>//' > neg_control_IDs.txt
+cat $viral_genomes_file | grep Neg_control | cut -c2- > neg_control_IDs.txt
 
 #Execute the python script that outputs Final_viral_sequences_after_dereplication.txt file with only the sequences that do not cluster with negative control sequences
 python vOTUs_clustering_processing.py $clusters neg_control_IDs.txt
