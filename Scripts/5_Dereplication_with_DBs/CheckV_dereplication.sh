@@ -1,7 +1,7 @@
 #!/bin/bash
 #SBATCH --job-name=CheckV_der_all_viruses
 #SBATCH --output=CheckV_der_all_viruses.out
-#SBATCH --mem=100gb
+#SBATCH --mem=20gb
 #SBATCH --time=1-0
 #SBATCH --cpus-per-task=24
 #SBATCH --export=NONE
