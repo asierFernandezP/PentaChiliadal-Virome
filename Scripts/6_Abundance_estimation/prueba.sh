@@ -6,10 +6,10 @@
 #SBATCH --get-user-env=L
 #SBATCH --partition=regular
 
-SAMPLE=$1
+SAMPLE_ID="$(basename "$1")"
 BATCH=$2
-Bowtie_DB=$2 # Path to Bowtie index generated from the representative sequences
-viral_rep_seqs=$3 # FASTA file with all the vOTUs representative viral sequences
+Bowtie_DB=$3 # Path to Bowtie index generated from the representative sequences
+viral_rep_seqs=$4 # FASTA file with all the vOTUs representative viral sequences
 
 # Create directories if they don't exist
 if [[ ! -d ${BATCH}/Alignment_results ]]; then
