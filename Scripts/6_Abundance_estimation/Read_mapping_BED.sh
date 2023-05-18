@@ -25,8 +25,10 @@ fi
 
 echo '-------------------- WORKING WITH '${SAMPLE_ID}' SAMPLE --------------------'
 
-# Clean environment, load modules
-module purge; module load Python/3.9.6-GCCcore-11.2.0 Bowtie2 SAMtools BEDTools; module list
+# Clean environment, load modules and activate conda environment
+module purge; ml Anaconda3; module list
+source activate /home2/p304845/Conda_envs/SAMTools_conda/; conda list
+ml Bowtie2 BEDTools; module list
 
 # Map the reads
 bowtie2 \
@@ -37,6 +39,8 @@ bowtie2 \
 	--no-unal \
 	--threads ${SLURM_CPUS_PER_TASK} \
 	-S ${BATCH}/${SAMPLE_ID}_all_vir_alignments.sam
+	
+
 
 samtools view \
 	-S ${BATCH}/${SAMPLE_ID}_all_vir_alignments.sam \
