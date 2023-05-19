@@ -25,22 +25,18 @@ fi
 
 echo '-------------------- WORKING WITH '${SAMPLE_ID}' SAMPLE --------------------'
 
-# Clean environment, load modules and activate conda environment
-module purge; ml Anaconda3; module list
-source activate /home2/p304845/Conda_envs/SAMTools_conda/; conda list
-ml Bowtie2 BEDTools; module list
+# Clean environment, load modules
+module purge; module load Python/3.9.6-GCCcore-11.2.0 Bowtie2 SAMtools BEDTools; module list
 
 # Map the reads
 bowtie2 \
 	--very-sensitive \
 	-x $Bowtie_DB/Viral_rep_seqs_DB \
-	-1 ${BATCH}/${SAMPLE_ID}*_kneaddata_cleaned_pair_1.fastq.gz \
-	-2 ${BATCH}/${SAMPLE_ID}*_kneaddata_cleaned_pair_2.fastq.gz \
+	-1 ${BATCH}/${SAMPLE_ID}_kneaddata_cleaned_pair_1.fastq.gz \
+	-2 ${BATCH}/${SAMPLE_ID}_kneaddata_cleaned_pair_2.fastq.gz \
 	--no-unal \
 	--threads ${SLURM_CPUS_PER_TASK} \
 	-S ${BATCH}/${SAMPLE_ID}_all_vir_alignments.sam
-	
-
 
 samtools view \
 	-S ${BATCH}/${SAMPLE_ID}_all_vir_alignments.sam \
@@ -63,4 +59,4 @@ bedtools coverage \
 	> ${BATCH}/Breadth_coverage_results/${SAMPLE_ID}.coverage.txt
 
 # Remove intermediate files
-rm ${BATCH}/${SAMPLE_ID}_all_vir_alignments.sam ${BATCH}/${SAMPLE_ID}_all_vir_alignments.bam
+rm ${SAMPLE_ID}_all_vir_alignments.sam ${SAMPLE_ID}_all_vir_alignments.bam
