@@ -32,8 +32,8 @@ module purge; module load Python/3.9.6-GCCcore-11.2.0 Bowtie2 SAMtools BEDTools;
 bowtie2 \
 	--very-sensitive \
 	-x $Bowtie_DB/Viral_rep_seqs_DB \
-	-1 ${BATCH}/${SAMPLE_ID}_kneaddata_cleaned_pair_1.fastq.gz \
-	-2 ${BATCH}/${SAMPLE_ID}_kneaddata_cleaned_pair_2.fastq.gz \
+	-1 ${BATCH}/${SAMPLE_ID}_*_1.fastq.gz \
+	-2 ${BATCH}/${SAMPLE_ID}_*_2.fastq.gz \
 	--no-unal \
 	--threads ${SLURM_CPUS_PER_TASK} \
 	-S ${BATCH}/${SAMPLE_ID}_all_vir_alignments.sam
