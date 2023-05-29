@@ -1,7 +1,7 @@
 #!/bin/bash
 #SBATCH --job-name=summary_Read_mapping
 #SBATCH --output=summary_Read_mapping.out
-#SBATCH --mem=32gb
+#SBATCH --mem=16gb
 #SBATCH --time=01:59:00
 #SBATCH --cpus-per-task=16
 #SBATCH --export=NONE
