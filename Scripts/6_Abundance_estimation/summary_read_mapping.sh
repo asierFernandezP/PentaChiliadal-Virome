@@ -8,7 +8,7 @@
 #SBATCH --get-user-env=L
 #SBATCH --partition=regular
 
-viral_genomes=$1 # FASTA file with representative viral genomes
+viral_genomes=$1 # file with the names of representative viral genomes
 samples=$2 # file with sample names
 bed_coverage_output=$3 # path to BED coverage output files *.coverage.txt
 reads_table=$4 # file with sample names and number of clean reads
@@ -16,6 +16,5 @@ reads_table=$4 # file with sample names and number of clean reads
 # Clean environment, load modules
 module purge; module load R; module list
 
-# Get names of representative viral genomes and execute the R script
-viral_genomes_names=$(cat rep_seqs_vOTUs.fa | grep ">" | cut -c2- | sort | uniq)
-Rscript summary_read_mapping.R $viral_genomes_names $samples $bed_coverage_output $reads_table
+# Execute the R script
+Rscript summary_read_mapping.R $viral_genomes $samples $bed_coverage_output $reads_table
