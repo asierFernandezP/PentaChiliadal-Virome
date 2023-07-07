@@ -15,4 +15,6 @@ We here describe the methods used to:
 - Identify and filter plasmid sequences (geNomad)
 - Remove host contamination and filter viral sequences with low completeness (≤50%) (CheckV)
 - Perform a rRNA-based quality control to further remove possible bacterial contamination
-- 
+- Dereplicate the predicted viral sequences with viral genomes from public databases
+- Abundance estimation of the viral sequences
+- Downstream analyses 
