@@ -8,7 +8,7 @@ args = parser.parse_args()
 
 #Read the files
 with open(args.Clusters, 'r') as clusters, open(args.Negcontrol_sequences, 'r') as negcontrol, open('Final_viral_sequences_after_dereplication.txt', 'w') as output:
-    # Read the sequence names to exclude from plasmids file into a set
+    # Read the sequence names to exclude from negative control file into a set
     exclude = set(line.strip() for line in negcontrol)
 
 # Loop over the lines in clusters file:
